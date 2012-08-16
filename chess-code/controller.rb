@@ -10,7 +10,7 @@ class Controller
 	
 	def move(from_col, from_row, to_col, to_row)
 		print("Controller: Moving the piece...\n");
-		@model.move('a', 2, 'a', 3);
+		@model.move(from_col, from_row, to_col, to_row);
 	end
 
 end
