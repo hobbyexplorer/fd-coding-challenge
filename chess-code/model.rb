@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
-require 'square_space'
-require 'pawn'
-require 'chess_exceptions'
+require './square_space.rb'
+require './pawn.rb'
+require './chess_exceptions.rb'
 
 #Model class
 class Model
@@ -47,7 +47,7 @@ class Model
 		#validating the move
 		#getting color and difference in movement.
 		row_diff = to_row-from_row;
-		col_diff = ((to_col[0])-(from_col[0]));
+		col_diff = ((to_col[0].ord)-(from_col[0]).ord);
 		if(piece_color==1 && row_diff==1 && col_diff==0)
 			#one step white move
 			origin_piece = @board[from_col][from_row].piece
@@ -58,22 +58,26 @@ class Model
 				@board[to_col][to_row].piece = @board[from_col][from_row].piece;
 				@board[from_col][from_row].piece = nil;
 				puts "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
+				#puts "one step white move forward";
+				return "one step white move forward";
 			end
-			puts "one step white move";
 		elsif(piece_color==1 && row_diff==2 && col_diff==0)
 			#first move two step
 			#Yet to add validation for first move.
-			puts "first move two step";
+			puts "white first move two step";
+			return "white first move two step";
 		elsif(piece_color==1 && row_diff==1 && col_diff==1)
 			#cross step white move to capture
 			puts "cross step white move to capture";
-		
+			return "cross step white move to capture";
 		elsif(piece_color==0 && row_diff==(-1) && col_diff==0)
 			#one step black move 
-			puts "one step black move ";
+			puts "one step black move forward";
+			return "one step black move forward";
 		elsif(piece_color==0 && row_diff==(-2) && col_diff==0)
-			#first move two step, black
-			puts "first move two step, black";
+			#black first move two step
+			puts "black first move two step";
+			return "black first move two step";
 		elsif(piece_color==0 && row_diff==(-1) && col_diff==1)
 			#cross step black move to capture
 			origin_piece = @board[from_col][from_row].piece
@@ -93,16 +97,21 @@ class Model
 				raise no_piece_exception, "Either origin or destination piece is not found",caller;
 			end
 			puts "cross step black move to capture";
+			return "cross step black move to capture";
 		elsif(row_diff==0 && col_diff==0)
 			puts "Piece not moved";
+			return "Piece not moved";
 		elsif(piece_color==1)
 			#A wrong white move
-			puts "A wrong white move";
+			puts "wrong white move";
+			return "wrong white move";
 		elsif(piece_color==0)
 			#wrong black move
 			puts "wrong black move";
+			return "wrong black move";
 		else
 			puts "What move is this?";
+			return "What move is this?";
 		end
 	end
 	

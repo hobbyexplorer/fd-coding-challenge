@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require 'model'
+require './model.rb'
 
 #Controller class. 
 class Controller
@@ -9,7 +9,7 @@ class Controller
 	end
 	
 	def move(from_col, from_row, to_col, to_row)
-		print("Controller: Moving the piece...\n");
+		#print("Controller: Moving the piece...\n");
 		@model.move(from_col, from_row, to_col, to_row);
 	end
 
