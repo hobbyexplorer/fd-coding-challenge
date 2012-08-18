@@ -72,8 +72,17 @@ class Model
 			return "cross step white move to capture";
 		elsif(piece_color==0 && row_diff==(-1) && col_diff==0)
 			#one step black move 
-			puts "one step black move forward";
-			return "one step black move forward";
+			origin_piece = @board[from_col][from_row].piece
+			dest_piece= @board[to_col][to_row].piece
+			if(origin_piece!=nil && dest_piece!=nil)
+				raise WrongMoveException.new, "Can not move, blocked by another piece",caller;
+			elsif(origin_piece!=nil && dest_piece==nil)
+				@board[to_col][to_row].piece = @board[from_col][from_row].piece;
+				@board[from_col][from_row].piece = nil;
+				puts "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
+				puts "one step black move forward";
+				return "one step black move forward";
+			end
 		elsif(piece_color==0 && row_diff==(-2) && col_diff==0)
 			#black first move two step
 			puts "black first move two step";
