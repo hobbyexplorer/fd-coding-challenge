@@ -7,5 +7,4 @@ class Square
 		@piece = one_piece
 	end
 	attr_accessor:piece
-	
 end

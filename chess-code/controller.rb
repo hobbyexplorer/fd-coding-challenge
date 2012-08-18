@@ -12,5 +12,4 @@ class Controller
 		#print("Controller: Moving the piece...\n");
 		@model.move(from_col, from_row, to_col, to_row);
 	end
-
 end

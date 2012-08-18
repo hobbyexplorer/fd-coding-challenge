@@ -16,6 +16,10 @@ class View
 	#to_pos = ARGV[1];
 	#controller.move(from_pos[0],from_pos[1].to_i,to_pos[0],to_pos[1].to_i);
 end
+	cont = Controller.new;
+	cont.move('a',2,'a',3); #Pawn moves one step forward.
+	puts "see a3 piece";
+	puts cont.model.board['a'][3].piece.color;
 =begin
 	#White pawn moves
 	controller.move('a',2,'a',2); #piece not moved

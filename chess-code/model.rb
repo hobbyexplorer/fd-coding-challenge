@@ -41,7 +41,7 @@ class Model
 			piece_color = one_piece.color
 		else
 			no_piece_exception = NoPieceException.new
-			raise no_piece_exception, "No piece found in the given location",caller;
+			raise no_piece_exception, "No piece found in the location #{from_col}#{from_row}",caller;
 		end
 		
 		#validating the move
@@ -56,20 +56,20 @@ class Model
 				raise WrongMoveException.new, "Can not move, blocked by another piece",caller;
 			elsif(origin_piece!=nil && dest_piece==nil)
 				@board[to_col][to_row].piece = @board[from_col][from_row].piece;
-				@board[from_col][from_row].piece = nil;
+				@board[from_col][from_row] = Square.new(nil);
 				puts "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 				#puts "one step white move forward";
-				return "one step white move forward";
+				return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 			end
 		elsif(piece_color==1 && row_diff==2 && col_diff==0)
 			#first move two step
 			#Yet to add validation for first move.
 			puts "white first move two step";
-			return "white first move two step";
+			return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 		elsif(piece_color==1 && row_diff==1 && col_diff==1)
 			#cross step white move to capture
 			puts "cross step white move to capture";
-			return "cross step white move to capture";
+			return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 		elsif(piece_color==0 && row_diff==(-1) && col_diff==0)
 			#one step black move 
 			origin_piece = @board[from_col][from_row].piece
@@ -81,12 +81,12 @@ class Model
 				@board[from_col][from_row].piece = nil;
 				puts "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 				puts "one step black move forward";
-				return "one step black move forward";
+				return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 			end
 		elsif(piece_color==0 && row_diff==(-2) && col_diff==0)
 			#black first move two step
 			puts "black first move two step";
-			return "black first move two step";
+			return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 		elsif(piece_color==0 && row_diff==(-1) && col_diff==1)
 			#cross step black move to capture
 			origin_piece = @board[from_col][from_row].piece
@@ -106,7 +106,7 @@ class Model
 				raise no_piece_exception, "Either origin or destination piece is not found",caller;
 			end
 			puts "cross step black move to capture";
-			return "cross step black move to capture";
+			return "Piece moved from #{from_col}#{from_row} to #{to_col}#{to_row}";
 		elsif(row_diff==0 && col_diff==0)
 			puts "Piece not moved";
 			return "Piece not moved";
